@@ -13,10 +13,6 @@ type File {
   mimetype: String!
   encoding: String!
 }
-# for request
-# operations    {"query":"mutation ($file: Upload!) { singleUpload(file: $file) { filename\n    mimetype\n    encoding\n } }", "variables": { "file": null } }
-# map           { "0": ["variables.file"] }
-# 0             actual file to be uploaded
 # 
 
 type Mutation{

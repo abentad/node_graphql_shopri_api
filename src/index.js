@@ -13,7 +13,16 @@ const prisma = new PrismaClient();
  
 
 const server = new GraphQLServer({ typeDefs:'src/schema.graphql', resolvers: { Upload, Query, Mutation, User, Product }, context: { prisma } });
+
+// server.express.use(
+//     cors({
+//         origin: "http://localhost:8080",
+//         credentials: true
+//     })
+// );
+
+
+
 server.start(() => console.log('Server is running on http://localhost:4000'));
 
-'{"query":"mutation ($file: Upload!) { singleUpload(file: $file) { filename\n    mimetype\n    encoding\n } }", "variables": { "file": null } }'
 
