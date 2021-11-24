@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model conversations {
+  id                  Int        @id @default(autoincrement())
+  senderId            Int
+  receiverId          Int
+  senderName          String     @db.VarChar(80)
+  receiverName        String     @db.VarChar(80)
+  senderProfileUrl    String     @db.VarChar(80)
+  receiverProfileUrl  String     @db.VarChar(80)
+  lastMessage         String     @db.VarChar(100)
+  lastMessageTimeSent String     @db.VarChar(80)
+  lastMessageSenderId Int
+  messages            messages[]
+}
+
+model images {
+  image_id Int      @id @default(autoincrement())
+  id       Int
+  url      String   @db.VarChar(80)
+  products products @relation(fields: [id], references: [id], onUpdate: Restrict, map: "images_ibfk_1")
+
+  @@index([id], map: "id")
+}
+
+model messages {
+  id             Int           @id @default(autoincrement())
+  conversationId Int
+  senderId       Int?
+  senderName     String?       @db.VarChar(80)
+  messageText    String?       @db.VarChar(100)
+  timeSent       String?       @db.VarChar(80)
+  conversations  conversations @relation(fields: [conversationId], references: [id], onUpdate: Restrict, map: "messages_ibfk_1")
+
+  @@index([conversationId], map: "conversationId")
+}
+
+model products {
+  id          Int      @id @default(autoincrement())
+  isPending   String   @db.VarChar(10)
+  views       Int?
+  name        String?  @db.VarChar(80)
+  price       String?  @db.VarChar(40)
+  description String?  @db.VarChar(500)
+  category    String?  @db.VarChar(80)
+  image       String?  @db.VarChar(80)
+  datePosted  String?  @db.VarChar(80)
+  posterId    String?  @db.VarChar(80)
+  images      images[]
+}
+
+model users {
+  id            Int     @id @default(autoincrement())
+  deviceToken   String  @db.VarChar(250)
+  username      String? @db.VarChar(80)
+  email         String? @unique(map: "email") @db.VarChar(80)
+  phoneNumber   String? @db.VarChar(80)
+  password      String? @db.VarChar(80)
+  profile_image String? @db.VarChar(80)
+  dateJoined    String? @db.VarChar(80)
+}

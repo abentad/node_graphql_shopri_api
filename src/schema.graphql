@@ -1,0 +1,61 @@
+type Query {
+  user(id: ID!): User!
+  users: [User!]!
+  product(id: ID!): Product!
+  products: [Product!]!
+}
+
+# for file upload purpose
+scalar Upload
+type File {
+  filename: String!
+  filelocation: String!
+  mimetype: String!
+  encoding: String!
+}
+# for request
+# operations    {"query":"mutation ($file: Upload!) { singleUpload(file: $file) { filename\n    mimetype\n    encoding\n } }", "variables": { "file": null } }
+# map           { "0": ["variables.file"] }
+# 0             actual file to be uploaded
+# 
+
+type Mutation{
+  createUser(data: CreateUserInput!): User!
+  singleUpload(file: Upload!): File!
+}
+
+type User{
+  id: ID!
+  deviceToken: String!
+  username: String!
+  email: String!
+  phoneNumber: String!
+  password: String!
+  profile_image: String!
+  dateJoined: String!
+  products: [Product!]!
+}
+
+type Product{
+  id: ID!
+  isPending: String!
+  views: Int!
+  name: String!
+  price: String!
+  description: String!
+  category: String!
+  image: String!
+  datePosted: String!
+  posterId: String!
+  poster: User!
+}
+
+input CreateUserInput{
+  deviceToken: String!
+  username: String!
+  email: String!
+  phoneNumber: String!
+  password: String!
+  profile_image: String!
+  dateJoined: String!
+}
