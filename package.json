@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@prisma/client": "^3.5.0",
-    "graphql-yoga": "^1.18.3"
+    "bcrypt": "^5.0.1",
+    "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "^8.5.1"
   }
 }

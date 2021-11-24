@@ -16,8 +16,15 @@ type File {
 # 
 
 type Mutation{
-  createUser(data: CreateUserInput!): User!
+  createUser(data: CreateUserInput!): AuthPayload!
+  loginUser(data: LoginUserInput!): AuthPayload!
+  createProduct(data: CreateProductInput): Product!
   singleUpload(file: Upload!): File!
+}
+
+type AuthPayload{
+  token: String!
+  user: User!
 }
 
 type User{
@@ -55,3 +62,20 @@ input CreateUserInput{
   profile_image: String!
   dateJoined: String!
 }
+
+input LoginUserInput{
+  email: String!
+  password: String!
+}
+
+input CreateProductInput{
+  isPending: String!
+  views: Int!
+  name: String!
+  price: String!
+  description: String!
+  category: String!
+  image: String!
+  datePosted: String!
+}
+

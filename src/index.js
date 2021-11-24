@@ -12,15 +12,15 @@ const Upload = require('./resolvers/Upload');
 const prisma = new PrismaClient();
  
 
-const server = new GraphQLServer({ typeDefs:'src/schema.graphql', resolvers: { Upload, Query, Mutation, User, Product }, context: { prisma } });
+const server = new GraphQLServer({ 
+    typeDefs:'src/schema.graphql',
+    resolvers: { Upload, Query, Mutation, User, Product },
+    context(req){
+        return { prisma, req };
+    } 
+});
 
-// server.express.use(
-//     cors({
-//         origin: "http://localhost:8080",
-//         credentials: true
-//     })
-// );
-
+// server.express.use();
 
 
 server.start(() => console.log('Server is running on http://localhost:4000'));

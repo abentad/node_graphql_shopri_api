@@ -22,6 +22,7 @@ const Query = {
         return product;
     },
     async products(parent, args, { prisma }, info){
+        //TODO: paginate this query
         const products = await prisma.products.findMany();
         return products;
     },
