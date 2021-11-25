@@ -4,7 +4,9 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  // url      = "mysql://rentochcom_david:y]~eHw@E*b$%@localhost:3306/rentochcom_shopri"
+  url      = "mysql://root:@localhost:3306/shopri"
+  // url      = env("DATABASE_URL")
 }
 
 model conversations {

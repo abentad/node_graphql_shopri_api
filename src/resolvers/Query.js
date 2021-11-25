@@ -13,9 +13,9 @@ const Query = {
         if(!product) throw new Error('Product not found');
         return product;
     },
-    async products(parent, args, { prisma }, info){
-        //TODO: paginate this query
-        const products = await prisma.products.findMany();
+    async products(parent, { page, take}, { prisma }, info){
+        //TODO: Sort it
+        const products = await prisma.products.findMany({ skip: page * take, take });
         return products;
     },
 }
