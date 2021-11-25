@@ -18,6 +18,7 @@ type File {
 type Mutation{
   createUser(data: CreateUserInput!): AuthPayload!
   loginUser(data: LoginUserInput!): AuthPayload!
+  loginUserByToken: User!
   updateUser(data: UpdateUserInput): User!
   deleteUser: User!
   deleteUserById(id: ID!): User!

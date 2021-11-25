@@ -22,6 +22,12 @@ const Mutation = {
         const token = jwt.sign({ id: user.id }, jwtSecret);
         return { user, token };
     },
+    async loginUserByToken(parent, args, { prisma, req }, info){
+        const userId = getUserId(req);
+        const user = await prisma.users.findUnique({ where: { id: Number(userId) } });
+        if(!user) throw new Error('User not found');
+        return user;
+    },
     async updateUser(parent, { data }, { prisma, req }, info){
         const userId = getUserId(req);
         const user = await prisma.users.findUnique({ where: { id: Number(userId) } });
