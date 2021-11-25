@@ -1,10 +1,6 @@
 const Query = {
     async user(parent, { id }, { prisma }, info){
-        const user = await prisma.users.findUnique({
-            where:{
-                id: Number(id)
-            }
-        });
+        const user = await prisma.users.findUnique({ where:{ id: Number(id) } });
         if(!user) throw new Error('User not found');
         return user;
     },
@@ -13,11 +9,7 @@ const Query = {
         return users;
     },
     async product(parent, { id }, { prisma }, info){
-        const product = await prisma.products.findUnique({
-            where:{
-                id: Number(id)
-            }
-        });
+        const product = await prisma.products.findUnique({ where:{ id: Number(id) } });
         if(!product) throw new Error('Product not found');
         return product;
     },
